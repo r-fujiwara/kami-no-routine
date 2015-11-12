@@ -16,7 +16,7 @@ import (
 	"syscall"
 )
 
-func greet(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+func work(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	name := kami.Param(ctx, "name")
 	fmt.Println("****************************************")
 	fmt.Println(name)
@@ -32,7 +32,7 @@ func main() {
 	ctx := context.Background()
 	kami.Context = ctx
 
-	kami.Post("/work", greet)
+	kami.Post("/work", work)
 	
   go func() {
 		kami.Serve()
