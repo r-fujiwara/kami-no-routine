@@ -7,18 +7,18 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"runtime"
 	"github.com/guregu/kami"
 	"golang.org/x/net/context"
+	"net/http"
 	"os"
 	"os/signal"
+	"runtime"
 	"syscall"
 )
 
 func work(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	name := kami.Param(ctx, "name")
-	fmt.Println("****************************************")
+	fmt.Println("**********request has come**************")
 	fmt.Println(name)
 }
 
@@ -33,10 +33,11 @@ func main() {
 	kami.Context = ctx
 
 	kami.Post("/work", work)
-	
-  go func() {
+
+	go func() {
 		kami.Serve()
 	}()
-	
+
 	<-sig
+
 }
